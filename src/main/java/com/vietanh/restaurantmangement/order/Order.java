@@ -1,17 +1,19 @@
 package com.vietanh.restaurantmangement.order;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.vietanh.restaurantmangement.customer.Customer;
-import com.vietanh.restaurantmangement.model.BaseEntity;
 import com.vietanh.restaurantmangement.model.ItemsEntity;
+import com.vietanh.restaurantmangement.order_items.OrderItems;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,11 +25,15 @@ public class Order extends ItemsEntity {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+    @OneToMany(mappedBy = "order")
+    private List<OrderItems> orderItems;
 
-    @Override
-    public Long getId() {
-        // TODO Auto-generated method stub
-        return super.getId();
+    public List<OrderItems> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItems> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public LocalDateTime getDt() {

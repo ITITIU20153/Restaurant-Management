@@ -13,12 +13,12 @@ import jakarta.persistence.Table;
 @Table(name = "item_table")
 public class Items extends ItemsEntity {
     @Column(name = "price")
-    private int price;
+    private Integer price;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 

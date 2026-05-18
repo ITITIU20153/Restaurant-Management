@@ -25,6 +25,7 @@ public class ItemsService {
     }
 
     public void deleteItemById(Long id) {
+        getItemById(id);
         itemsRepositories.deleteById(id);
     }
 

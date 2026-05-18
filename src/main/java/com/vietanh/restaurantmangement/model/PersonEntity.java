@@ -9,12 +9,15 @@ public class PersonEntity extends BaseEntity {
     @Column(name = "fullname")
     @NotBlank
     private String fullName;
-    @Column(name = "username")
+    //
+    @Column(name = "username", unique = true)
     @NotBlank
     private String userName;
+    //
     @Column(name = "password")
     @NotBlank
     private String passWord;
+    //
     @Column
     @NotBlank
     private String role;
