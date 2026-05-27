@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.vietanh.restaurantmangement.customer.Customer;
+import com.vietanh.restaurantmangement.customer.CustomerProfile;
 import com.vietanh.restaurantmangement.model.ItemsEntity;
 import com.vietanh.restaurantmangement.order_items.OrderItems;
 
@@ -15,7 +15,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "order_table")
 public class Order extends ItemsEntity {
@@ -24,31 +28,7 @@ public class Order extends ItemsEntity {
     private LocalDateTime dt;
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private CustomerProfile customer;
     @OneToMany(mappedBy = "order")
     private List<OrderItems> orderItems;
-
-    public List<OrderItems> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItems> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public LocalDateTime getDt() {
-        return dt;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setDt(LocalDateTime dt) {
-        this.dt = dt;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 }

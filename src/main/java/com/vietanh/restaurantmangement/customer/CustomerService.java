@@ -15,31 +15,16 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> findAllCustomers() {
+    public List<CustomerProfile> findAllCustomers() {
         return customerRepository.findAll();
     }
 
-    public Customer findCustomerById(Long id) {
+    public CustomerProfile findCustomerById(Long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found Customer"));
     }
 
-    public Boolean checkCustomerByUserName(String userName) {
-        return customerRepository.existsByUserName(userName);
-    }
-
-    public Customer findCustomerByUserName(String userName) {
-        return customerRepository.findCustomerByUserName(userName);
-    }
-
-    public Customer createCustomer(Customer customer) {
-        if (checkCustomerByUserName(customer.getUserName())) {
-            throw new RuntimeException("Username '" + customer.getUserName() + "' already esxit");
-        }
-        String passWord = customer.getPassWord();
-        BcryptPassword encoder = new BcryptPassword();
-        customer.setPassWord(encoder.encode(passWord));
-
+    public CustomerProfile createCustomer(CustomerProfile customer) {
         return customerRepository.save(customer);
     }
 

@@ -22,25 +22,20 @@ public class CustomerController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        List<Customer> customers = customerService.findAllCustomers();
-        for (Customer customer : customers) {
-            customer.setPassWord(null);
-        }
+    public ResponseEntity<List<CustomerProfile>> getAllCustomers() {
+        List<CustomerProfile> customers = customerService.findAllCustomers();
         return ResponseEntity.ok(customers);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
-        Customer customer = customerService.findCustomerById(id);
-        customer.setPassWord(null);
+    public ResponseEntity<CustomerProfile> getCustomerById(@PathVariable Long id) {
+        CustomerProfile customer = customerService.findCustomerById(id);
         return ResponseEntity.ok(customer);
     }
 
     @PostMapping()
-    public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer) {
-        Customer createdCustomer = customerService.createCustomer(customer);
-        createdCustomer.setPassWord(null);
+    public ResponseEntity<CustomerProfile> postCustomer(@RequestBody CustomerProfile customer) {
+        CustomerProfile createdCustomer = customerService.createCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 
